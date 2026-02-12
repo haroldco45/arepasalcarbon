@@ -3,117 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arepas Al Carbón - Pedido</title>
+    <title>Arepas Al Carbón - Pedido Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .category-header { background: linear-gradient(to right, #dc2626, #991b1b); }
+        input[type=number] { -moz-appearance: textfield; }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 pb-32">
+<body class="bg-gray-100 text-gray-800 pb-40">
 
     <script>
         (function() {
-            const vencimiento = new Date('2027-02-12'); 
-            if (new Date() > vencimiento) {
-                document.body.innerHTML = '<div class="h-screen flex items-center justify-center text-center p-5"><div><i class="fas fa-lock text-5xl text-red-600 mb-4"></i><h2 class="text-2xl font-bold">Servicio Suspendido</h2><p>Por favor, contacte al desarrollador.</p></div></div>';
+            const fechaVencimiento = new Date('2027-02-12'); 
+            if (new Date() > fechaVencimiento) {
+                document.body.innerHTML = '<div class="h-screen flex items-center justify-center text-center p-10 bg-white"><div><i class="fas fa-exclamation-triangle text-6xl text-red-600 mb-4"></i><h2 class="text-xl font-bold">LICENCIA EXPIRADA</h2><p class="text-gray-500">Contacte al desarrollador para renovar el servicio.</p></div></div>';
             }
         })();
     </script>
 
-    <header class="bg-white p-6 shadow-sm border-b-4 border-red-600">
+    <header class="bg-white p-6 shadow-md border-b-4 border-red-600 sticky top-0 z-40">
         <div class="flex flex-col items-center">
-            <img src="arepas--al-carbon.PNG" alt="Logo" class="w-20 h-20 rounded-full shadow-md mb-2">
+            <img src="arepas--al-carbon.PNG" alt="Logo" class="w-20 h-20 rounded-full shadow-lg mb-2">
             <h1 class="text-xl font-black text-gray-900 tracking-tighter">AREPAS AL CARBÓN</h1>
-            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Cra. 15 #14-62, Caucasia</p>
+            <p class="text-[10px] text-gray-500 font-bold uppercase">Cra. 15 #14-62, Caucasia, Antioquia</p>
         </div>
     </header>
 
-    <div class="max-w-2xl mx-auto p-4 space-y-8">
-        <section class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 space-y-3">
-            <h2 class="text-xs font-black text-red-600 uppercase tracking-widest mb-2 italic">Información de Entrega</h2>
-            <input type="text" id="cliente-nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 transition-all text-sm font-medium">
-            <input type="text" id="cliente-dir" placeholder="Dirección de entrega" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 transition-all text-sm font-medium">
-            <select id="forma-pago" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 transition-all text-sm font-medium">
+    <div class="max-w-2xl mx-auto p-4 space-y-6">
+        
+        <section class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+            <h2 class="text-[10px] font-black text-red-600 uppercase tracking-widest border-b pb-2">Datos del Cliente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="c-nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 text-sm">
+                <input type="tel" id="c-tel" placeholder="Número de celular" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 text-sm">
+            </div>
+            <input type="text" id="c-dir" placeholder="Dirección de entrega" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 text-sm">
+            <select id="c-pago" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 text-sm font-medium">
                 <option value="">Seleccione forma de pago</option>
                 <option value="Efectivo">Efectivo</option>
-                <option value="Transferencia (Nequi/Bancolombia)">Transferencia (Nequi/Bancolombia)</option>
-                <option value="Datafono">Datáfono</option>
+                <option value="Nequi / Bancolombia">Nequi / Bancolombia</option>
+                <option value="Datáfono">Datáfono</option>
             </select>
-            <textarea id="observaciones" placeholder="Observaciones (ej: sin cebolla, traer cambio de $50k...)" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 transition-all text-sm font-medium h-20"></textarea>
+            <textarea id="c-obs" placeholder="Observaciones (ej: sin cebolla, traer cambio de $50k...)" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl outline-none focus:border-red-500 text-sm h-20"></textarea>
         </section>
 
-        <div id="lista-menu" class="space-y-8">
+        <div id="menu-container" class="space-y-8">
             </div>
     </div>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-red-100 p-4 shadow-2xl z-50">
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-red-100 p-4 shadow-[0_-10px_20px_rgba(0,0,0,0.1)] z-50">
         <div class="max-w-2xl mx-auto flex items-center justify-between">
             <div>
-                <span class="text-[10px] font-bold text-gray-400 uppercase">Total Pedido</span>
-                <p id="total-general" class="text-2xl font-black text-red-600 leading-none">$ 0</p>
+                <span class="text-[10px] font-bold text-gray-400 uppercase leading-none">Total del Pedido</span>
+                <p id="total-display" class="text-3xl font-black text-red-600 leading-tight">$ 0</p>
             </div>
-            <button onclick="enviarPedido()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-2xl font-black flex items-center gap-2 transition-all active:scale-95 shadow-lg">
+            <button onclick="enviarPedido()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-black flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-green-200">
                 <i class="fab fa-whatsapp text-2xl"></i>
-                REALIZAR PEDIDO
+                ENVIAR PEDIDO
             </button>
         </div>
     </div>
 
-    <footer class="p-10 text-center text-gray-400 text-[9px] font-medium tracking-tighter uppercase">
+    <footer class="p-10 text-center text-gray-400 text-[10px] font-medium tracking-widest uppercase">
         desarrollada por vibras positivas derechos de autor
     </footer>
 
     <script>
-        const menuData = [
-            { cat: "Aperitivos", items: [
-                { n: "Entrada De Patacones", p: 6990, d: "Crocantes con suero y encurtido casero." },
-                { n: "Entrada De Butifarra", p: 5990, d: "4 piezas con limón y arepita." },
-                { n: "Platanitos", p: 6990, d: "Plátano verde con 3 tipos de salsas." }
+        const productos = [
+            { cat: "Aperitivos 🫒", items: [
+                { n: "Entrada De Patacones", p: 6990, d: "Crocantes con Suero y el mejor encurtido." },
+                { n: "Entrada De Butifarra", p: 5990, d: "4 piezas picanticas con limón y arepita." },
+                { n: "Platanitos", p: 6990, d: "Platano verde crocante con 3 tipos de salsas." }
             ]},
-            { cat: "Arepas Especiales", items: [
-                { n: "Arepa Queso y Mantequilla", p: 6990, d: "Doble queso y mantequilla." },
+            { cat: "Arepas 🫓", items: [
+                { n: "Arepa Queso y Mantequilla", p: 6990, d: "Doble queso y mantequilla cremosa." },
                 { n: "Arepa de la Casa", p: 17990, d: "Pollo, res, cerdo, chicharrón, chorizo y quesos." },
-                { n: "Arepa Caucasiana", p: 17990, d: "Desmechadas, chicharrón, butifarra, maíz y queso frito." },
-                { n: "Arepa Paisa", p: 17990, d: "Res, chicharrón, chorizo, maduritos y aguacate." }
+                { n: "Arepa Caucasiana", p: 17990, d: "Res, pollo, cerdo, chicharrón, butifarra, maíz y queso frito." },
+                { n: "Arepa Paisa", p: 17990, d: "Res, chicharrón, chorizo, maduritos, aguacate y queso." },
+                { n: "Arepa Antioqueña", p: 17990, d: "Res, chicharrón, maíz tierno, guacamole y quesos." },
+                { n: "Arepa Mexicana", p: 17990, d: "Res o Pechuga, ranchera, tocineta, guacamole y jalapeño." },
+                { n: "Arepa Pocoyó", p: 11990, d: "Queso frito, maduritos y jamón." },
+                { n: "Arepa Chorizo y Butifarra", p: 11990, d: "Chorizo, butifarra y doble queso." },
+                { n: "Arepas Rancheras", p: 17990, d: "Res o Pechuga, salchicha ranchera, maíz y quesos." },
+                { n: "Arepa Broster", p: 18000, d: "Pollo apanado, ranchera, maduritos y mozarella." }
             ]},
-            { cat: "Patacones", items: [
-                { n: "Pataconada Paisa (2 pers)", p: 49990, d: "Mix de patacones, carnes y aguacate." },
-                { n: "Pataconada Costeña (2 pers)", p: 46990, d: "Yuca, chicharrón, ranchera y queso frito." },
-                { n: "Patacón Ranchero", p: 26990, d: "Pechuga, ranchera, guacamole y mozarella." }
+            { cat: "Patacones 🍌", items: [
+                { n: "Pataconada Paisa (2 pers)", p: 49990, d: "Mix patacones, carnes, chorizo, chicharrón y aguacate." },
+                { n: "Pataconada Costeña (2 pers)", p: 46990, d: "Chicharrón, carnes, ranchera, yuca y queso frito." },
+                { n: "Pataconada Personal", p: 31990, d: "Carne desmechada, chicharrón y queso frito." },
+                { n: "Totumas de Patacón", p: 31990, d: "4 canastas rellenas de carnes y guacamole." },
+                { n: "Patacon Paisa", p: 26990, d: "Pintón, tocineta, carnes mixtas y aguacate." },
+                { n: "Patacon Mexicano", p: 26990, d: "Res y pollo, jalapeño, tocineta, guacamole y doritos." },
+                { n: "Patacón Ranchero", p: 26990, d: "Pintón, pechuga, ranchera y guacamole." },
+                { n: "Patacon Caucasiano", p: 26990, d: "3 tipos de carne, queso frito y butifarra." }
             ]},
-            { cat: "Papas y Maíz", items: [
-                { n: "Salchipapa Traviesa", p: 24990, d: "Premium, ranchera, butifarra, pechuga y 3 quesos." },
-                { n: "Papas de la Casa", p: 21990, d: "Queso gratinado, carne/pollo, guacamole y encurtido." },
-                { n: "Maicitos Rancheros", p: 34990, d: "Maíz tierno, carne desmechada, ranchera y maduritos." }
+            { cat: "Papas y Maíz 🍟", items: [
+                { n: "Salchijunior", p: 14990, d: "Papas francesas, ranchera y queso rallado." },
+                { n: "Salchipapa Traviesa", p: 24990, d: "Ranchera, butifarra, pechuga y 3 tipos de queso." },
+                { n: "Papas de la Casa", p: 21990, d: "Queso gratinado, carne o pollo, guacamole y encurtido." },
+                { n: "Papas Rancheras", p: 40990, d: "250g carne asada, ranchera, mozarella y tártara." },
+                { n: "Maicitos Rancheros", p: 34990, d: "Maíz tierno, carne desmechada, ranchera y quesos." }
             ]},
-            { cat: "Asados", items: [
-                { n: "Res Asado al Carbón", p: 34900, d: "250g de res, papas, piña y ensalada." },
-                { n: "Pechuga Asada", p: 32900, d: "300g de pechuga, papas y arepa con queso." }
+            { cat: "Asados Al Carbón 🔥", items: [
+                { n: "Res Asado", p: 34900, d: "250g de res, papas, piña y arepa con queso." },
+                { n: "Pechuga Asada", p: 32900, d: "300g de pechuga, papas, piña y ensalada." }
             ]},
-            { cat: "Bebidas", items: [
+            { cat: "Adiciones 🍅", items: [
+                { n: "Porción de Arepas (x10)", p: 1990, d: "Paquete para llevar." },
+                { n: "Adición de Res o Pollo", p: 10990, d: "150g aproximadamente." },
+                { n: "Adición Chicharrón Carnudo", p: 11990, d: "200g aproximadamente." },
+                { n: "Adición Aguacate/Guacamole", p: 4990, d: "Porción fresca." },
+                { n: "Adición de Papas", p: 6990, d: "Francesas crujientes." },
+                { n: "Queso Frito", p: 6990, d: "Queso costeño frito." },
+                { n: "Porción Chorizo (2)", p: 5990, d: "Chorizo de la casa." },
+                { n: "Salchicha Ranchera (2)", p: 4990, d: "Picadas." },
+                { n: "Tocineta (3)", p: 4990, d: "Tiras crocantes." }
+            ]},
+            { cat: "Almuerzos 🍲", items: [
+                { n: "Cazuela Paisa", p: 25000, d: "Frijoles, chicharrón, arroz, aguacate y carnes." },
+                { n: "Tilapia Completa", p: 24000, d: "Arroz, patacones, ensalada y jugo." },
+                { n: "Bandeja Carne Asada", p: 18000, d: "Frijoles, sopa, ensalada y papas." },
+                { n: "Bandeja Pechuga Apanada", p: 18000, d: "Papas, ensalada, sopa y jugo." },
+                { n: "Mote de Queso (Viernes)", p: 15000, d: "Especial del día." }
+            ]},
+            { cat: "Desayunos ☕", items: [
+                { n: "Calentao Paisa", p: 14000, d: "Arroz, frijol, chicharrón, huevo y quesito." },
+                { n: "Desayuno Paisa", p: 8000, d: "Arepa, huevos, queso y chocolate." },
+                { n: "Arepa Mañanera", p: 11000, d: "Huevos, butifarra o salchicha y jugo." },
+                { n: "Sándwich de Jamón", p: 11000, d: "Lechuga, tomate y huevos con cebollín." }
+            ]},
+            { cat: "Bebidas 🍹", items: [
                 { n: "Michelada De Soda", p: 9990, d: "Soda Bretaña con limón y sal." },
                 { n: "Limonada Cerezada", p: 14900, d: "Cerezas, limón y ginger." },
-                { n: "Limonada de Coco", p: 11990, d: "Cremosa de la casa." },
-                { n: "Barril Pa Los 8", p: 29990, d: "Jarra gigante (Mix frutas)." }
+                { n: "Limonada de Coco", p: 11990, d: "Especialidad cremosa." },
+                { n: "Barril Pa Los 8", p: 29990, d: "Jarra gigante de fruta natural." },
+                { n: "Milo Frío/Caliente", p: 9990, d: "Leche líquida." },
+                { n: "Jugo Natural (Mora/Fresa)", p: 7990, d: "En agua o leche." },
+                { n: "Hatsu / Cocacola", p: 6990, d: "Variedad de sabores." },
+                { n: "Agua Mineral", p: 2499, d: "Botella personal." }
             ]}
         ];
 
         let pedido = {};
 
-        function init() {
-            const container = document.getElementById('lista-menu');
-            container.innerHTML = menuData.map(seccion => `
+        function render() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = productos.map(seccion => `
                 <div>
-                    <h2 class="text-[10px] font-black text-red-600 uppercase tracking-widest mb-3 border-l-4 border-red-600 pl-2">${seccion.cat}</h2>
-                    <div class="space-y-3">
+                    <h2 class="category-header text-white text-[11px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-lg shadow-sm mb-4 italic italic">
+                        <i class="fas fa-chevron-right mr-2"></i>${seccion.cat}
+                    </h2>
+                    <div class="grid gap-3">
                         ${seccion.items.map(item => `
-                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center">
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-gray-900 text-sm leading-tight">${item.n}</h3>
-                                    <p class="text-[9px] text-gray-400 mb-1">${item.d}</p>
-                                    <span class="text-xs font-black text-red-600">$${item.p.toLocaleString()}</span>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center group transition-all">
+                                <div class="flex-1 pr-4">
+                                    <h3 class="font-bold text-gray-900 text-sm leading-tight group-hover:text-red-600 transition-colors">${item.n}</h3>
+                                    <p class="text-[9px] text-gray-400 mb-2 leading-tight">${item.d}</p>
+                                    <span class="text-sm font-black text-red-600">$${item.p.toLocaleString()}</span>
                                 </div>
-                                <input type="number" min="0" placeholder="0" 
-                                    onchange="modificar('${item.n}', ${item.p}, this.value)"
-                                    class="w-12 p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-bold text-sm outline-none focus:border-red-500">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[8px] font-bold text-gray-300 uppercase mb-1">Cant.</span>
+                                    <input type="number" min="0" placeholder="0" 
+                                        onchange="modificar('${item.n}', ${item.p}, this.value)"
+                                        class="w-14 p-2 bg-gray-50 border-2 border-gray-200 rounded-xl text-center font-bold text-sm outline-none focus:border-red-500 transition-all">
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -121,47 +175,53 @@
             `).join('');
         }
 
-        function modificar(n, p, c) {
-            if (parseInt(c) > 0) pedido[n] = { precio: p, cantidad: parseInt(c) };
-            else delete pedido[n];
+        function modificar(nombre, precio, cant) {
+            if (parseInt(cant) > 0) {
+                pedido[nombre] = { precio: precio, cantidad: parseInt(cant) };
+            } else {
+                delete pedido[nombre];
+            }
             let total = 0;
             Object.values(pedido).forEach(i => total += (i.precio * i.cantidad));
-            document.getElementById('total-general').innerText = `$ ${total.toLocaleString()}`;
+            document.getElementById('total-display').innerText = `$ ${total.toLocaleString()}`;
         }
 
         function enviarPedido() {
-            const nombre = document.getElementById('cliente-nombre').value;
-            const dir = document.getElementById('cliente-dir').value;
-            const pago = document.getElementById('forma-pago').value;
-            const obs = document.getElementById('observaciones').value;
+            const nom = document.getElementById('c-nombre').value;
+            const tel = document.getElementById('c-tel').value;
+            const dir = document.getElementById('c-dir').value;
+            const pag = document.getElementById('c-pago').value;
+            const obs = document.getElementById('c-obs').value;
 
-            if (Object.keys(pedido).length === 0) return alert("Agrega productos al pedido");
-            if (!nombre || !dir || !pago) return alert("Completa los datos del cliente y forma de pago");
+            if (Object.keys(pedido).length === 0) return alert("Seleccione al menos un producto.");
+            if (!nom || !tel || !dir || !pag) return alert("Por favor complete los datos de entrega y pago.");
 
-            let factura = `*NUEVO PEDIDO - AREPAS AL CARBÓN*\n`;
-            factura += `--------------------------------\n`;
-            factura += `*Cliente:* ${nombre}\n`;
-            factura += `*Dirección:* ${dir}\n`;
-            factura += `*Pago:* ${pago}\n`;
-            if(obs) factura += `*Nota:* ${obs}\n`;
-            factura += `--------------------------------\n`;
-            factura += `*CANT | PRODUCTO | SUBTOTAL*\n`;
+            let factura = `*🛒 NUEVO PEDIDO - AREPAS AL CARBÓN*\n`;
+            factura += `------------------------------------------\n`;
+            factura += `*CLIENTE:* ${nom}\n`;
+            factura += `*CELULAR:* ${tel}\n`;
+            factura += `*DIRECCIÓN:* ${dir}\n`;
+            factura += `*PAGO:* ${pag}\n`;
+            if(obs) factura += `*NOTAS:* ${obs}\n`;
+            factura += `------------------------------------------\n`;
+            factura += `*DETALLE DEL PEDIDO:*\n`;
             
             let total = 0;
-            for (const [prod, dato] of Object.entries(pedido)) {
+            for (const [nombre, dato] of Object.entries(pedido)) {
                 let sub = dato.precio * dato.cantidad;
-                factura += `• ${dato.cantidad} x ${prod} ($${sub.toLocaleString()})\n`;
+                factura += `• ${dato.cantidad}x ${nombre} ($${sub.toLocaleString()})\n`;
                 total += sub;
             }
             
-            factura += `--------------------------------\n`;
-            factura += `*TOTAL A PAGAR: $${total.toLocaleString()}*\n`;
-            factura += `--------------------------------\n`;
-            factura += `_Solicitado vía App_`;
+            factura += `------------------------------------------\n`;
+            factura += `*TOTAL NETO: $${total.toLocaleString()}*\n`;
+            factura += `------------------------------------------\n`;
+            factura += `_Solicitado por Catálogo Digital_`;
 
             window.open(`https://wa.me/573205519271?text=${encodeURIComponent(factura)}`, '_blank');
         }
-        init();
+
+        render();
     </script>
 </body>
 </html>
