@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arepas Al Carbón - App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .category-pill::-webkit-scrollbar { display: none; }
+        .product-card:active { transform: scale(0.98); }
+        :root { --primary-red: #dc2626; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="bg-red-600 text-white p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-600 shadow-md">
+                    <i class="fas fa-fire-alt"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Arepas Al Carbón</h1>
+                    <p class="text-xs opacity-90 text-white">Caucasia, Antioquia</p>
+                </div>
+            </div>
+            <a href="https://wa.me/573205519271" class="bg-green-500 hover:bg-green-600 p-2 rounded-full transition shadow-lg">
+                <i class="fab fa-whatsapp text-xl text-white"></i>
+            </a>
+        </div>
+
+        <div class="category-pill overflow-x-auto flex gap-2 p-3 bg-white border-b">
+            <button onclick="filterMenu('all')" class="bg-red-600 text-white px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap active-pill">Todos</button>
+            <button onclick="filterMenu('Arepas')" class="bg-gray-100 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">Arepas 🫓</button>
+            <button onclick="filterMenu('Patacones')" class="bg-gray-100 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">Patacones 🍌</button>
+            <button onclick="filterMenu('Papas')" class="bg-gray-100 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">Papas 🍟</button>
+            <button onclick="filterMenu('Bebidas')" class="bg-gray-100 px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">Bebidas 🍹</button>
+        </div>
+    </header>
+
+    <section class="p-4">
+        <div class="bg-gradient-to-r from-red-500 to-red-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden">
+            <div class="relative z-10">
+                <p class="text-sm font-light italic italic mb-1">"La comida es nuestra pasión"</p>
+                <p class="text-xs font-semibold uppercase tracking-widest"><i class="fas fa-clock mr-1"></i> Abiertos 16:30 - 23:00</p>
+            </div>
+            <i class="fas fa-utensils absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12"></i>
+        </div>
+    </section>
+
+    <main class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="menu-container">
+        </main>
+
+    <footer class="bg-white mt-8 border-t p-6 text-center text-gray-500">
+        <p class="text-sm font-bold text-red-600 mb-2">Arepas Al Carbón</p>
+        <p class="text-xs">Cra. 15 #14-62, Caucasia</p>
+        <div class="mt-4 flex justify-center gap-4 text-xl">
+            <i class="fab fa-instagram text-pink-500"></i>
+            <i class="fab fa-facebook text-blue-600"></i>
+        </div>
+        <p class="text-[10px] mt-6 uppercase tracking-widest">App desarrollada por Vibras Positivas ©</p>
+    </footer>
+
+    <script>
+        const products = [
+            { name: "Arepa de la Casa", category: "Arepas", price: "17.990", desc: "3 tipos de carne (pollo, res, cerdo), chicharrón, chorizo y quesos.", img: "https://via.placeholder.com/150?text=Arepa" },
+            { name: "Arepa Caucasiana", category: "Arepas", price: "17.990", desc: "Res, pollo, cerdo desmechado, chicharrón, butifarra, maíz y queso frito.", img: "https://via.placeholder.com/150?text=Caucasiana" },
+            { name: "Pataconada Paisa", category: "Patacones", price: "49.990", desc: "Para 2 personas. Patacones verdes y maduros, chorizo, chicharrón, carne y aguacate.", img: "https://via.placeholder.com/150?text=Patacon" },
+            { name: "Salchipapa Traviesa", category: "Papas", price: "24.990", desc: "Papas francesas, ranchera, butifarra, pechuga, queso frito y mozarella.", img: "https://via.placeholder.com/150?text=Salchipapa" },
+            { name: "Maicitos Rancheros", category: "Especiales", price: "34.990", desc: "Maíz tierno, carne desmechada, ranchera, queso gratinado y platanitos.", img: "https://via.placeholder.com/150?text=Maicitos" },
+            { name: "Limonada de Coco", category: "Bebidas", price: "11.990", desc: "Deliciosa y refrescante preparación de la casa.", img: "https://via.placeholder.com/150?text=Bebida" }
+        ];
+
+        function renderMenu(items) {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = items.map(product => `
+                <div class="product-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex items-center p-3 gap-3 transition hover:shadow-md">
+                    <img src="${product.img}" class="w-24 h-24 object-cover rounded-lg bg-gray-100">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-gray-900 leading-tight">${product.name}</h3>
+                            <span class="text-red-600 font-bold text-sm">$${product.price}</span>
+                        </div>
+                        <p class="text-xs text-gray-500 my-1 line-clamp-2">${product.desc}</p>
+                        <button class="mt-2 text-[10px] font-bold uppercase text-gray-400 border border-gray-200 px-2 py-1 rounded hover:bg-gray-50">
+                            <i class="fas fa-plus mr-1"></i> Añadir
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterMenu(cat) {
+            const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+            renderMenu(filtered);
+            
+            // Efecto visual en botones
+            event.target.parentElement.querySelectorAll('button').forEach(btn => {
+                btn.classList.replace('bg-red-600', 'bg-gray-100');
+                btn.classList.replace('text-white', 'text-gray-800');
+            });
+            event.target.classList.replace('bg-gray-100', 'bg-red-600');
+            event.target.classList.replace('text-gray-800', 'text-white');
+        }
+
+        // Carga inicial
+        renderMenu(products);
+    </script>
+</body>
+</html>
